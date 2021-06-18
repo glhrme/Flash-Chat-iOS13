@@ -16,7 +16,21 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func loginPressed(_ sender: UIButton) {
-        Auth.auth().sign
+        guard let email = emailTextfield.text, let password = passwordTextfield.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let e = error {
+                self.alertPresent(title: "Error", message: e.localizedDescription)
+            } else {
+                self.performSegue(withIdentifier: Constants.loginSegue, sender: self)
+            }
+        }
+    }
+    
+    func alertPresent(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let dismiss = UIAlertAction(title: "Continuar", style: .cancel, handler: nil)
+        alert.addAction(dismiss)
+        present(alert, animated: true, completion: nil)
     }
     
 }

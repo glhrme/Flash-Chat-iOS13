@@ -7,16 +7,16 @@
 //
 
 import UIKit
-import CLTypingLabel
 import FirebaseAuth
 
 class WelcomeViewController: UIViewController {
 
-    @IBOutlet weak var titleLabel: CLTypingLabel!
+    @IBOutlet weak var titleLabel: UILabel!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = "⚡️FlashChat"
+        titleLabel.text = Constants.title
     }
     
 
