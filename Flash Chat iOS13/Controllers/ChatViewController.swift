@@ -17,11 +17,7 @@ class ChatViewController: UIViewController {
     
     let db = Firestore.firestore()
     
-    var messages: [Message] = [
-        Message(sender: "guilherme@guisantos.com.br", body: "Oi", destination: "guilherme1@guisantos.com.br"),
-        Message(sender: "guilherme1@guisantos.com.br", body: "Oi", destination: "guilherme@guisantos.com.br"),
-        Message(sender: "guilherme@guisantos.com.br", body: "Oi2", destination: "guilherme1@guisantos.com.br")
-    ]
+    var messages: [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +26,27 @@ class ChatViewController: UIViewController {
         self.tableView.register(UINib(nibName: Constants.Nibname, bundle: nil), forCellReuseIdentifier: Constants.cellReusable)
         title = "RaioChat"
         navigationItem.hidesBackButton = true
+        loadMessages()
+    }
+    
+    func loadMessages() {
+        db.collection("messages").order(by: "date").addSnapshotListener { (querySnapshot, error) in
+            if let e = error {
+                print(e)
+            } else if let documents = querySnapshot?.documents{
+                self.messageTextfield.text = ""
+                self.messages = []
+                for message in documents {
+                    let doc = message.data()
+                    if let sender = doc["sender"] as? String, let body = doc["body"] as? String {
+                        self.messages.append(Message(sender: sender, body: body))
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
@@ -43,7 +60,7 @@ class ChatViewController: UIViewController {
     
     @IBAction func sendPressed(_ sender: UIButton) {
         if let messageBody = messageTextfield.text, let messageSender = Auth.auth().currentUser?.email {
-            self.db.collection("messages").addDocument(data: ["sender": messageSender, "message": messageBody]) { (error) in
+            self.db.collection("messages").addDocument(data: ["sender": messageSender, "body": messageBody, "date": Date().timeIntervalSince1970]) { (error) in
                 if let e = error {
                     print(e)
                 } else {

@@ -14,9 +14,8 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="57" id="KGk-i7-Jjw" customClass="MessageCell" customModule="Flash_Chat_iOS13" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" translatesAutoresizingMaskIntoConstraints="NO" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
-                <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gd9-f9-Grl">
                         <rect key="frame" x="10" y="6.5" width="300" height="44"/>
@@ -48,15 +47,27 @@
                                 </constraints>
                             </imageView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="trF-uQ-Ba0"/>
+                            <constraint firstAttribute="width" constant="300" id="v9X-he-zvq"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="height" constant="57" id="Arl-SN-7hx"/>
                     <constraint firstItem="gd9-f9-Grl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-6" id="CuU-PE-Pde"/>
                     <constraint firstItem="gd9-f9-Grl" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="PaT-GL-3VC"/>
+                    <constraint firstAttribute="width" constant="320" id="WsY-rK-iMn"/>
                     <constraint firstItem="gd9-f9-Grl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wuq-HJ-9Wm"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <constraints>
+                <constraint firstItem="H2p-sc-9uM" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" id="ILy-Ak-Edk"/>
+                <constraint firstItem="H2p-sc-9uM" firstAttribute="trailing" secondItem="njF-e1-oar" secondAttribute="trailing" id="Kh5-ZP-LGg"/>
+                <constraint firstItem="H2p-sc-9uM" firstAttribute="top" secondItem="njF-e1-oar" secondAttribute="top" id="Szh-Gm-S5x"/>
+                <constraint firstItem="H2p-sc-9uM" firstAttribute="bottom" secondItem="njF-e1-oar" secondAttribute="bottom" id="ntz-3G-3Z7"/>
+            </constraints>
             <connections>
                 <outlet property="label" destination="nFc-NX-BXr" id="3X4-RT-C4a"/>
                 <outlet property="messageBuble" destination="Lko-LN-6eO" id="dfM-wJ-ujk"/>

@@ -15,4 +15,8 @@ struct Constants {
     
     static let cellReusable = "ReusableCell"
     static let Nibname = "MessageCell"
+    
+    static let messageSender = "sender"
+    static let messageBody = "body"
+    static let messageCollection = "messages"
 }
